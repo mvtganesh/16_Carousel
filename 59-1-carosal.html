@@ -16,7 +16,7 @@ body{
 .carousel{
     position: relative;
     width: 100%;
-    height: 80%;      /* fixed height reference */
+    height: 80%;  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +24,7 @@ body{
 
 .carousel img{
     width: 100%;
-    height: 100%;       /* ONLY 50% of carousel */
+    height: 100%;
     object-fit: cover;
 }
 
@@ -102,8 +102,7 @@ body{
     showImg();
     startCarousel();
 
-        // stop  the auto carosal
-        // Pause on hover on image
+        // stop  the auto carosal , Pause on hover on image
         const img = document.getElementById("myImg");
         img.addEventListener("mouseenter", stopCarousel);
         img.addEventListener("mouseleave", startCarousel);
