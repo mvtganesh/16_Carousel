@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.carousel{
+    position: relative;
+    width: 100%;
+    height: 80%;      /* fixed height reference */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel img{
+    width: 100%;
+    height: 100%;       /* ONLY 50% of carousel */
+    object-fit: cover;
+}
+
+.btns{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgb(185, 185, 185);
+    color: white;
+    border: none;
+    padding: 20px 14px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 1s ease 0s;
+}
+
+.btns.prev{ left: 10px; }
+.btns.next{ right: 10px; }
+
+.btns:hover{
+    background: rgba(0,0,0,0.8);
+}
+
+    </style>
+</head>
+<body>
+    <div><h1 style="font-variant: small-caps;color: peru;text-shadow: 0px 0px 4px greenyellow;">Carousel</h1></div>
+<div class="carousel">
+        <img id="myImg" alt="">
+    <div>
+        <button title="Prev-Image"  class="btns prev" onclick="nextImg()" >❮</button>
+        <button title="Next-Image" class="btns next" onclick="prevImg()" >❯</button>
+    </div>
+</div>
+
+    <script>
+        let images=[
+            "https://picsum.photos/id/0/367/267","https://images.unsplash.com/2/10.jpg?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","https://fastly.picsum.photos/id/20/3670/2462.jpg?hmac=CmQ0ln-k5ZqkdtLvVO23LjVAEabZQx2wOaT4pyeG10I",
+            "https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg",
+            "https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg",
+            "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg",
+            "https://images.pexels.com/photos/33045/lion-wild-africa-african.jpg",
+            "https://images.pexels.com/photos/1563355/pexels-photo-1563355.jpeg"
+        ]
+        let ci=0
+        function showImg(){
+            document.getElementById('myImg').src=images[ci]
+        }
+        function nextImg(){
+            ci++
+            if(ci>images.length-1){
+                ci=0
+            }
+            showImg()
+        }
+        function prevImg(){
+            ci--
+            if(ci<0){
+                ci=images.length-1
+            }
+            showImg()
+            
+        }
+        // use for disp the 1st img defalut before click.
+    function startCarousel(){
+        intervalId = setInterval(nextImg, 2000);
+    }
+
+    function stopCarousel(){
+        clearInterval(intervalId);
+    }
+
+
+    // Show first image
+    showImg();
+    startCarousel();
+
+        // stop  the auto carosal
+        // Pause on hover on image
+        const img = document.getElementById("myImg");
+        img.addEventListener("mouseenter", stopCarousel);
+        img.addEventListener("mouseleave", startCarousel);
+
+
+        // Pause on button hover
+        const btns = document.getElementsByClassName("btns");
+        for (let btn of btns) {
+            btn.addEventListener("mouseenter", stopCarousel);
+            btn.addEventListener("mouseleave", startCarousel);
+        }
+</script>
+</body>
+</html>
